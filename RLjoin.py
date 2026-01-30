@@ -54,13 +54,20 @@ def enable_startup():
     if not path:
         return False, "APPDATA not set"
 
-    script_path = os.path.abspath(__file__)
-    python_exe = sys.executable
-    pythonw = os.path.join(os.path.dirname(python_exe), "pythonw.exe")
-    if os.path.exists(pythonw):
-        python_exe = pythonw
-
-    content = f'@echo off\nstart "" "{python_exe}" "{script_path}"\n'
+    # Check if we are running as a compiled exe (PyInstaller)
+    if getattr(sys, 'frozen', False):
+        # In PyInstaller, sys.executable is the path to the actual RL-Deminimizer.exe
+        exe_path = sys.executable
+        # We just want to run the exe. No arguments needed.
+        content = f'@echo off\nstart "" "{exe_path}"\n'
+    else:
+        # Running as a script (Development mode)
+        script_path = os.path.abspath(__file__)
+        python_exe = sys.executable
+        pythonw = os.path.join(os.path.dirname(python_exe), "pythonw.exe")
+        if os.path.exists(pythonw):
+            python_exe = pythonw
+        content = f'@echo off\nstart "" "{python_exe}" "{script_path}"\n'
     try:
         with open(path, "w", encoding="utf-8") as f:
             f.write(content)
