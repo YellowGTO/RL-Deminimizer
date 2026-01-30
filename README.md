@@ -2,6 +2,13 @@
 
 Bring Rocket League to the front the moment a match starts. RL Deminimizer monitors the Rocket League log file and automatically restores the game window when a server reserves your slot or when loading begins.
 
+## Quick Start (Recommended - No Python required)
+
+Download the latest standalone Windows executable from the [Releases page](https://github.com/YellowGTO/RL-Deminimizer/releases/latest).
+
+1. Download `RL-Deminimizer.exe` (or the versioned file shown in the release).
+2. Run the executable directly — no installation needed.
+
 ## Features
 - Detects match start from the Rocket League `Launch.log` file.
 - Restores and focuses the Rocket League window if it's minimized.
